@@ -1,11 +1,17 @@
+import coffeeData from "@/data/coffeeData";
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, StatusBar, ScrollView } from "react-native";
 
 const Settings = () => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <ScrollView>
+      {coffeeData.map((coffee, index) => (
+        <View key={index}>
+          <Text>Coffee Name: {coffee.name}</Text>
+          <Text>Coffee Price: {coffee.price}</Text>
+        </View>
+      ))}
+    </ScrollView>
   );
 };
 
