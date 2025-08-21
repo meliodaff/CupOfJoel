@@ -1,16 +1,26 @@
 import coffeeData from "@/data/coffeeData";
+import UseTheme from "@/hooks/useTheme";
 import React from "react";
-import { StyleSheet, View, Text, StatusBar, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 const Settings = () => {
+  const { toggleDarkMode } = UseTheme();
   return (
     <ScrollView>
-      {coffeeData.map((coffee, index) => (
-        <View key={index}>
-          <Text>Coffee Name: {coffee.name}</Text>
-          <Text>Coffee Price: {coffee.price}</Text>
-        </View>
-      ))}
+      <TouchableOpacity
+        onPress={() => {
+          toggleDarkMode();
+        }}
+      >
+        <Text>Dark Mode</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
