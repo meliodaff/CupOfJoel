@@ -6,13 +6,15 @@ import {
   TouchableOpacity,
   StatusBar,
   ScrollView,
+  Image,
+  ImageBackground,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect } from "react";
 import ProductButton from "../../components/ProductButton";
-import coffeeData from "@/data/coffeeData"
-import nonCoffeeData from '@/data/nonCoffeeData'
-import {useState} from 'react'
+import coffeeData from "@/data/coffeeData";
+import nonCoffeeData from "@/data/nonCoffeeData";
+import { useState } from "react";
 import Cart from "@/components/Cart";
 import Proceed from "@/components/Proceed";
 
@@ -20,34 +22,31 @@ export default function Index() {
   const { colors } = useTheme();
   const styles = createStyles(colors);
   const [openMenuModal, setOpenMenuModal] = useState(true);
-  const [openCartModal, setOpenCartModal] = useState(false)
-  const [openProceedModal, setOpenProceedModal] = useState(false)
-
+  const [openCartModal, setOpenCartModal] = useState(false);
+  const [openProceedModal, setOpenProceedModal] = useState(false);
 
   const handleOpenCoffeeModal = () => {
-    setOpenMenuModal(true)
-    setOpenCartModal(false)
-    setOpenProceedModal(false)
-  }
+    setOpenMenuModal(true);
+    setOpenCartModal(false);
+    setOpenProceedModal(false);
+  };
   const handleOpenNonCoffeeModal = () => {
-    setOpenMenuModal(false)
-    setOpenCartModal(false)
-    setOpenProceedModal(false)
-  }
-
+    setOpenMenuModal(false);
+    setOpenCartModal(false);
+    setOpenProceedModal(false);
+  };
 
   const handleOpenCartModal = () => {
-    setOpenMenuModal(false)
-    setOpenCartModal(true)
-    setOpenProceedModal(false)
-  }
+    setOpenMenuModal(false);
+    setOpenCartModal(true);
+    setOpenProceedModal(false);
+  };
 
   const handleOpenProceedModal = () => {
-    setOpenMenuModal(false)
-    setOpenCartModal(false)
-    setOpenProceedModal(true)
-  }
-
+    setOpenMenuModal(false);
+    setOpenCartModal(false);
+    setOpenProceedModal(true);
+  };
 
   return (
     <LinearGradient
@@ -60,7 +59,10 @@ export default function Index() {
             colors={colors.gradients.surface}
             style={{ borderColor: colors.border, borderWidth: 1 }}
           >
-            <TouchableOpacity style={styles.button} onPress={handleOpenCoffeeModal}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOpenCoffeeModal}
+            >
               <Text style={[styles.text, { paddingTop: 7 }]}>Coffee</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -68,7 +70,10 @@ export default function Index() {
             colors={colors.gradients.surface}
             style={{ borderColor: colors.border, borderWidth: 1 }}
           >
-            <TouchableOpacity style={styles.button} onPress={handleOpenNonCoffeeModal}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOpenNonCoffeeModal}
+            >
               <Text style={styles.text}>Non</Text>
               <Text style={styles.text}>Coffee</Text>
             </TouchableOpacity>
@@ -88,7 +93,10 @@ export default function Index() {
               marginBottom: 10,
             }}
           >
-            <TouchableOpacity style={styles.button} onPress={handleOpenCartModal}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOpenCartModal}
+            >
               <Text style={styles.text}>Cart</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -96,25 +104,34 @@ export default function Index() {
             colors={colors.gradients.success}
             style={{ borderColor: colors.border, borderWidth: 1 }}
           >
-            <TouchableOpacity style={styles.button} onPress={handleOpenProceedModal}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={handleOpenProceedModal}
+            >
               <Text style={styles.text}>Proceed</Text>
             </TouchableOpacity>
           </LinearGradient>
         </View>
       </View>
       <View style={styles.rightSection}>
-        <ScrollView>
-          {
-          openMenuModal ? <ProductButton 
-          coffeeData={coffeeData}
-          /> :
-            openCartModal ? <Cart/> 
-            : openProceedModal ? <Proceed/>
-
-          :<ProductButton 
-          coffeeData={nonCoffeeData} />
-          }
-        </ScrollView>
+        <ImageBackground
+          source={require("../../assets/images/cojl.png")} // adjust path
+          resizeMode="cover"
+          style={{ flex: 1 }}
+          imageStyle={{ opacity: 0.2 }}
+        >
+          <ScrollView>
+            {openMenuModal ? (
+              <ProductButton coffeeData={coffeeData} />
+            ) : openCartModal ? (
+              <Cart />
+            ) : openProceedModal ? (
+              <Proceed />
+            ) : (
+              <ProductButton coffeeData={nonCoffeeData} />
+            )}
+          </ScrollView>
+        </ImageBackground>
       </View>
     </LinearGradient>
   );

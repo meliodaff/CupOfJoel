@@ -85,6 +85,20 @@ const coffeeData: Product[] = [
     price: 79,
     image: "",
   },
+  {
+    id: 12,
+    name: "Iced Milkimon Coffee",
+    category: "Coffee",
+    price: 79,
+    image: "",
+  },
+  {
+    id: 12,
+    name: "Iced Milkimon Coffee",
+    category: "Coffee",
+    price: 79,
+    image: "",
+  },
 ];
 
 export default coffeeData;
