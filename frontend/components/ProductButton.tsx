@@ -2,6 +2,7 @@ import coffeeData from "@/data/coffeeData";
 import UseTheme, { ColorScheme } from "@/hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
+import Product from '@/types/product'
 import {
   StyleSheet,
   TouchableOpacity,
@@ -10,12 +11,15 @@ import {
   ScrollView,
 } from "react-native";
 
-const ProductButton = () => {
+const ProductButton = (props: any) => {
   const { colors } = UseTheme();
   const styles = createStyles(colors);
   return (
     <View style={styles.container}>
-      {coffeeData.map((coffee, index) => (
+      {props.coffeeData.map((coffee: Product, index: number) => {
+        const {id, name, category, price, image} = coffee 
+        return (
+
         <View key={index}>
           <LinearGradient
             colors={colors.gradients.surface}
@@ -25,10 +29,12 @@ const ProductButton = () => {
               <Text style={styles.text}>img</Text>
             </TouchableOpacity>
           </LinearGradient>
-          <Text style={styles.text}>{coffee.name}</Text>
+          <Text style={styles.text}>{name}</Text>
         </View>
-      ))}
+        )
+})}
     </View>
+    
   );
 };
 

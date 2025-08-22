@@ -11,9 +11,9 @@ import {
 } from "react-native";
 
 const Settings = () => {
-  const { toggleDarkMode } = UseTheme();
+  const { toggleDarkMode, colors } = UseTheme();
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <TouchableOpacity
         onPress={() => {
           toggleDarkMode();
@@ -25,6 +25,10 @@ const Settings = () => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 20
+  }
+});
 
 export default Settings;
