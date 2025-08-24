@@ -28,8 +28,8 @@ const ProductButton = (props: any) => {
       {props.coffeeData.map((coffee: Product, index: number) => {
         const { id, name, category, price, image } = coffee;
         return (
-          <>
-            <View key={index}>
+          <View key={index}>
+            <View>
               <LinearGradient
                 colors={colors.gradients.surface}
                 style={{ borderColor: colors.border, borderWidth: 1 }}
@@ -46,7 +46,7 @@ const ProductButton = (props: any) => {
               </LinearGradient>
               <Text style={styles.text}>{name}</Text>
             </View>
-          </>
+          </View>
         );
       })}
       {visible && (
