@@ -47,18 +47,16 @@ const ProductModal = (props: any) => {
       // define the size here soon
     );
 
-    console.log(quantity);
-
     if (repeatedOrder) {
-      setCart((prev) => {
-        return [...prev];
-      });
+      // setCart((prev) => {
+      //   return [
+      //     ...prev,
+      //     { ...order, price: order.price * quantity, addOns: [] }, // it doest accumulate all the quantity
+      //   ];
+      // });
     } else {
       setCart((prev) => {
-        return [
-          ...prev,
-          { ...order, price: order.price * quantity, addOns: [] }, // it doest accumulate all the quantity
-        ];
+        return [...prev, { ...order, price: quantity * order.price }];
       });
     }
     props.setVisible(false);
