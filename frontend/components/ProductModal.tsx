@@ -20,6 +20,7 @@ const ProductModal = (props: any) => {
   const { colors } = UseTheme();
   const styles = createStyles(colors);
   const [extraShot, setExtraShot] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0);
 
   return (
     <Modal
@@ -48,6 +49,9 @@ const ProductModal = (props: any) => {
                 <TouchableOpacity
                   onPress={() => {
                     setExtraShot((prev) => {
+                      if (prev >= 5) {
+                        return prev;
+                      }
                       return prev + 1;
                     });
                   }}
@@ -65,6 +69,9 @@ const ProductModal = (props: any) => {
                 <TouchableOpacity
                   onPress={() => {
                     setExtraShot((prev) => {
+                      if (prev <= 0) {
+                        return prev;
+                      }
                       return prev - 1;
                     });
                   }}
@@ -85,6 +92,9 @@ const ProductModal = (props: any) => {
                 <TouchableOpacity
                   onPress={() => {
                     setExtraShot((prev) => {
+                      if (prev >= 5) {
+                        return prev;
+                      }
                       return prev + 1;
                     });
                   }}
@@ -102,6 +112,9 @@ const ProductModal = (props: any) => {
                 <TouchableOpacity
                   onPress={() => {
                     setExtraShot((prev) => {
+                      if (prev <= 0) {
+                        return prev;
+                      }
                       return prev - 1;
                     });
                   }}
@@ -116,6 +129,106 @@ const ProductModal = (props: any) => {
                 </TouchableOpacity>
               </View>
               <Text>Extra shot</Text>
+            </View>
+            <View style={styles.quantityContainer}>
+              <View style={styles.quantityButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setExtraShot((prev) => {
+                      if (prev >= 5) {
+                        return prev;
+                      }
+                      return prev + 1;
+                    });
+                  }}
+                >
+                  <AntDesign
+                    name="plus"
+                    size={20}
+                    color="black"
+                    style={styles.addOrMinusButton}
+                  />
+                </TouchableOpacity>
+                <Divider colors={colors} />
+                <Text style={styles.quantityText}>{extraShot}</Text>
+                <Divider colors={colors} />
+                <TouchableOpacity
+                  onPress={() => {
+                    setExtraShot((prev) => {
+                      if (prev <= 0) {
+                        return prev;
+                      }
+                      return prev - 1;
+                    });
+                  }}
+                  style={[styles.addOrMinusButton]}
+                >
+                  <AntDesign
+                    name="minus"
+                    size={20}
+                    color="black"
+                    style={styles.addOrMinusButton}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text>Extra shot</Text>
+            </View>
+          </View>
+          <View style={styles.footer}>
+            <View style={styles.quantityContainer}>
+              <View style={styles.quantityButton}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setQuantity((prev) => {
+                      if (prev >= 5) {
+                        return prev;
+                      }
+                      return prev + 1;
+                    });
+                  }}
+                >
+                  <AntDesign
+                    name="plus"
+                    size={20}
+                    color="black"
+                    style={styles.addOrMinusButton}
+                  />
+                </TouchableOpacity>
+                <Divider colors={colors} />
+                <Text style={styles.quantityText}>{quantity}</Text>
+                <Divider colors={colors} />
+                <TouchableOpacity
+                  onPress={() => {
+                    setQuantity((prev) => {
+                      if (prev <= 0) {
+                        return prev;
+                      }
+                      return prev - 1;
+                    });
+                  }}
+                  style={[styles.addOrMinusButton]}
+                >
+                  <AntDesign
+                    name="minus"
+                    size={20}
+                    color="black"
+                    style={styles.addOrMinusButton}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text>Quantity</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontSize: 20, fontWeight: "700" }}>Total: 0</Text>
+              <TouchableOpacity style={[styles.buttonSubmit, styles.button]}>
+                <Text style={styles.textStyle}>Submit</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </LinearGradient>
@@ -159,6 +272,10 @@ const createStyles = (colors: ColorScheme) => {
     buttonClose: {
       backgroundColor: colors.danger,
     },
+    buttonSubmit: {
+      backgroundColor: colors.success,
+      marginLeft: 15,
+    },
     textStyle: {
       color: "white",
       fontWeight: "bold",
@@ -171,7 +288,11 @@ const createStyles = (colors: ColorScheme) => {
     },
     body: {
       flexDirection: "row",
-      gap: 30,
+      columnGap: 30,
+      rowGap: 15,
+      flexWrap: "wrap",
+      width: 380,
+      marginBottom: 15,
     },
     quantityContainer: {
       flexDirection: "row",
@@ -192,7 +313,13 @@ const createStyles = (colors: ColorScheme) => {
     quantityText: {
       marginHorizontal: 10,
     },
+
+    footer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
   });
+
   return styles;
 };
 
