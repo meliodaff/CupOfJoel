@@ -1,8 +1,11 @@
 import UseTheme, { ColorScheme } from "@/hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Cart from "@/types/cart";
+import Product from "@/types/product";
+import CartContext from "@/contexts/CartContext";
 
 const Divider = ({ colors }: { colors: ColorScheme }) => {
   return (
@@ -20,7 +23,46 @@ const ProductModal = (props: any) => {
   const { colors } = UseTheme();
   const styles = createStyles(colors);
   const [extraShot, setExtraShot] = useState<number>(0);
-  const [quantity, setQuantity] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(1);
+  // const [order, setOrder] = useState<Cart | null>(null);
+  const { cart, setCart } = useContext(CartContext);
+
+  const handleSubmit = (coffee: Product) => {
+    const order: Cart = {
+      id: coffee.id,
+      name: coffee.name,
+      category: coffee.category,
+      image: coffee.image,
+      price: coffee.price,
+      quantity: quantity,
+      addOns: [],
+    };
+
+    console.log(order);
+
+    const repeatedOrder = cart.find(
+      (item) =>
+        item.id === order.id &&
+        JSON.stringify(item.addOns) === JSON.stringify(order.addOns)
+      // define the size here soon
+    );
+
+    console.log(quantity);
+
+    if (repeatedOrder) {
+      setCart((prev) => {
+        return [...prev];
+      });
+    } else {
+      setCart((prev) => {
+        return [
+          ...prev,
+          { ...order, price: order.price * quantity, addOns: [] }, // it doest accumulate all the quantity
+        ];
+      });
+    }
+    props.setVisible(false);
+  };
 
   return (
     <Modal
@@ -35,7 +77,7 @@ const ProductModal = (props: any) => {
           style={styles.modalView}
         >
           <View style={styles.header}>
-            <Text style={styles.modalText}>{props.coffee}</Text>
+            <Text style={styles.modalText}>{props.coffee.name}</Text>
             <TouchableOpacity
               style={[styles.button, styles.buttonClose]}
               onPress={() => props.setVisible(false)}
@@ -200,7 +242,7 @@ const ProductModal = (props: any) => {
                 <TouchableOpacity
                   onPress={() => {
                     setQuantity((prev) => {
-                      if (prev <= 0) {
+                      if (prev <= 1) {
                         return prev;
                       }
                       return prev - 1;
@@ -226,7 +268,12 @@ const ProductModal = (props: any) => {
               }}
             >
               <Text style={{ fontSize: 20, fontWeight: "700" }}>Total: 0</Text>
-              <TouchableOpacity style={[styles.buttonSubmit, styles.button]}>
+              <TouchableOpacity
+                style={[styles.buttonSubmit, styles.button]}
+                onPress={() => {
+                  handleSubmit(props.coffee);
+                }}
+              >
                 <Text style={styles.textStyle}>Submit</Text>
               </TouchableOpacity>
             </View>

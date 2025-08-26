@@ -53,7 +53,7 @@ const ProductButton = (props: any) => {
         <ProductModal
           visible={visible}
           setVisible={setVisible}
-          coffee={selectedProduct.name}
+          coffee={selectedProduct}
         />
       )}
     </View>
