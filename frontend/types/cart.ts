@@ -1,3 +1,7 @@
+type AddOns = {
+  name: string;
+  quantity: number;
+};
 type Cart = {
   id: number;
   name: string;
@@ -6,7 +10,7 @@ type Cart = {
   // size: string;
   image: string;
   quantity: number;
-  addOns: string[];
+  addOns: AddOns[];
 };
 
 export default Cart;

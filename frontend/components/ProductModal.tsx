@@ -35,7 +35,12 @@ const ProductModal = (props: any) => {
       image: coffee.image,
       price: coffee.price,
       quantity: quantity,
-      addOns: [],
+      addOns: [
+        {
+          name: "extraShot",
+          quantity: extraShot,
+        },
+      ],
     };
 
     console.log(order);
@@ -48,17 +53,32 @@ const ProductModal = (props: any) => {
     );
 
     if (repeatedOrder) {
-      // setCart((prev) => {
-      //   return [
-      //     ...prev,
-      //     { ...order, price: order.price * quantity, addOns: [] }, // it doest accumulate all the quantity
-      //   ];
-      // });
+      setCart((prev) => {
+        prev.map((item) => {
+          if (JSON.stringify(item) === JSON.stringify(repeatedOrder)) {
+            return [
+              ...prev,
+              { ...order, quantity: item.quantity + order.quantity },
+            ];
+          }
+        });
+        return prev;
+      });
     } else {
       setCart((prev) => {
-        return [...prev, { ...order, price: quantity * order.price }];
+        return [
+          ...prev,
+          {
+            ...order,
+            price: quantity * order.price + order.addOns[0].quantity * 9, // lets say the 9 is the price for the extra shot
+          },
+        ];
       });
     }
+    console.log("--------------------------------------");
+    console.log(quantity * order.price + order.addOns[0].quantity * 9);
+    console.log("--------------------------------------");
+    console.log(cart);
     props.setVisible(false);
   };
 
