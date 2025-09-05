@@ -5,6 +5,7 @@ type Product = {
   category: Category;
   price: number;
   image: string;
+  size: string;
 };
 
 export default Product;

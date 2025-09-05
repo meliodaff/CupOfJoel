@@ -7,7 +7,7 @@ type Cart = {
   name: string;
   category: string;
   price: number;
-  // size: string;
+  size: string;
   image: string;
   quantity: number;
   addOns: AddOns[];

@@ -44,7 +44,7 @@ export default function Index() {
     setOpenMenuModal(false);
     setOpenCartModal(true);
     setOpenProceedModal(false);
-    alert(JSON.stringify(cart));
+    // alert(JSON.stringify(cart));
   };
 
   const handleOpenProceedModal = () => {
