@@ -22,7 +22,16 @@ const Cart = () => {
       <ScrollView style={styles.container}>
         {cart.length === 0 ? (
           <View>
-            <Text>No item yet</Text>
+            <Text
+              style={{
+                marginHorizontal: "auto",
+                marginVertical: 50,
+                fontSize: 100,
+                fontWeight: "700",
+              }}
+            >
+              No item yet
+            </Text>
           </View>
         ) : (
           cart.map((item, index) => (
